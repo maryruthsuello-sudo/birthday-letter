@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Janelle!</title>
+
+  <style>
+    body {
+      background-color: pink;
+      color: white;
+      font-family: 'Pixelify Sans', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 50px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .panel {
+      margin-top: 30px;
+      font-size: 30px;
+    }
+
+    /* Typing cursor */
+    #typing-text::after {
+      content: "|";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .img-btn {
+      position: relative;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      margin-top: 40px;
+    }
+
+    .img-btn img {
+      width: 150px;
+      height: auto;
+      display: block;
+    }
+
+    .img-btn span {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .img-btn:hover {
+      opacity: 0.85;
+    }
+
+    .img-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Audio -->
+  <audio id="bg-music" loop>
+    <source src="Typing Sound Effect (no copyright).mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <h1>Before we go further, just a Disclaimer!</h1> 
+
+    <div class="panel">
+      <p id="typing-text"></p>
+    </div> 
+
+    <button class="img-btn" onclick="location.href='page2.html'">
+      <img src="pinkButton-removebg-preview.png" alt="">
+      <span>Next</span>
+    </button>
+  </div>
+
+  <script>
+    const music = document.getElementById("bg-music");
+    const textEl = document.getElementById("typing-text");
+
+    const message = "As of now, wala pa akong physical gift sayo kaya ito muna HAHAHA. This is my first time writing/making/creating something like this, so please, donut (do not) judge my coding skills + designing skills. Anyway this isn’t about me. Now it’s time to celebrate your birthday!";
+
+    const startTime = 2; // music start point in seconds
+    const endTime = 8;   // music end point in seconds
+    let index = 0;
+    const typingSpeed = 50; // milliseconds per character
+
+    // Reset music to startTime
+    music.currentTime = startTime;
+    music.volume = 0.4;
+
+    // Loop between startTime and endTime
+    music.addEventListener("timeupdate", () => {
+      if (music.currentTime >= endTime) {
+        music.currentTime = startTime;
+      }
+    });
+
+    function type() {
+      if (index < message.length) {
+        if (index === 0) music.play(); // start music when typing begins
+        textEl.textContent += message.charAt(index);
+        index++;
+        setTimeout(type, typingSpeed);
+      } else {
+        music.pause(); // stop music when typing ends
+      }
+    }
+
+    window.onload = type;
+  </script>
+
+</body>
+</html>
